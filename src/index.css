@@ -8,13 +8,15 @@
 
 body{
   font-family: "Poppins";
-  /* background: #595959; */
+  min-height: 60vh;
+  overflow-x: hidden;
 }
 
 .App{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 100vw;
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* width: 100vw; */
   /* height: 200vh; */
 }

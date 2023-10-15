@@ -1,21 +1,28 @@
 import { AppBar, Toolbar, Box, Typography, Button } from "@mui/material";
 
 interface NavbarProps {
-  isLogin:boolean;
-  setIsLogin: (value:boolean)=>void;
+  isLogin: boolean;
+  setIsLogin: (value: boolean) => void;
 }
 
-const Navbar:React.FC<NavbarProps> = ({isLogin,setIsLogin}) => {
+const Navbar: React.FC<NavbarProps> = ({ isLogin, setIsLogin }) => {
+  const handleLogOut=()=>{
+    setIsLogin(true);
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("gameList");
+  }
   return (
-    <AppBar
-      sx={navbarStyles}
-    >
+    <AppBar sx={navbarStyles}>
       <Toolbar>
-        <Box sx={{...navContainerStyles,justifyContent:isLogin?"center":"space-between"}}>
-          <Typography fontSize="1.4rem" fontWeight="700">SimpleViralGames</Typography>
-         {
-          !isLogin && <Button onClick={()=>setIsLogin(true)} sx={buttonStyles} variant="contained">Logout</Button>
-         } 
+        <Box sx={{ ...navContainerStyles, justifyContent: isLogin ? "center" : "space-between" }}>
+          <Typography fontSize="1.6rem" fontWeight="600" color="#484848" fontFamily="Poppins">
+            SVG Task
+          </Typography>
+          {!isLogin && (
+            <Button onClick={handleLogOut} sx={buttonStyles} variant="contained">
+              Logout
+            </Button>
+          )}
         </Box>
       </Toolbar>
     </AppBar>
@@ -24,25 +31,27 @@ const Navbar:React.FC<NavbarProps> = ({isLogin,setIsLogin}) => {
 
 const navbarStyles = {
   position: "sticky",
-  margin: "12px auto",
-  borderRadius: "15px",
-  background: "rgba(0,0,0,0.8)",
+  background: "beige",
   top: "0px",
-  width: "80%",
-}
+  width:'100vw',
+  height:"12vh",
+  display:'flex',
+  justifyContent:"center",
+};
 
 const navContainerStyles = {
-  width:"100%",
-  display:"flex",
-  alignItems:"center"
-}
+  width: "100%",
+  display: "flex",
+  alignItems: "center",
+  padding:'10px',
+};
 
 const buttonStyles = {
-  background:"grey",
-  "&:hover":{
-    background:"white",
-    color:'black'
-  }
-}
+  background: "grey",
+  "&:hover": {
+    background: "#484848",
+    color: "white",
+  },
+};
 
 export default Navbar;

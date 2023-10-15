@@ -11,18 +11,19 @@ const LoginPage: React.FC<LoginPageProps> = ({ isLogin, setIsLogin }) => {
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
-  const handleLogin = () => {
+const handleLogin = () => {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  
+
     if (email.trim() === "" || password.trim() === "") {
       setError("Please fill in both email and password fields.");
     } else if (!emailPattern.test(email)) {
       setError("Please enter a valid email address.");
     } else {
       setIsLogin(!isLogin);
+      localStorage.setItem("isLoggedIn", "true");
+      console.log("Login successful. isLoggedIn set to true.");
     }
   };
-  
 
   return (
     <Container maxWidth="sm" sx={loginContainerStyles}>
@@ -93,6 +94,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ isLogin, setIsLogin }) => {
 const loginContainerStyles = {
   display: "flex",
   justifyContent: "center",
+  marginTop:"2rem"
 };
 
 const buttonStyles = {
